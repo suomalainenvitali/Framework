@@ -6,7 +6,7 @@ class Config {
     private function __construct() {}
     private function __clone() {}   
 
-    public static function get($path) {
+    public static function get(string $path) {
         include_once __DIR__ . '/../config.php';
         
         $path_array = explode('/', $path);
