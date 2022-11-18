@@ -7,12 +7,15 @@ class Route {
     private function __construct() {}
     private function __clone() {}
 
-    public static function route(string $url) {
+    //Метод роутинга
+    public static function route(string $url): void {
+        //Подключение файла с массивом маршрутов
         include_once __DIR__ . '/../routes.php';
+        //Получение массива маршрутов
         $routes = getRoutes();
-
+        //Получение пути из URL
         $path = parse_url($url, PHP_URL_PATH);
-
+        //Поиск маршрута
         foreach ($routes as $route) {
             if (preg_match($route['condition'], $path, $params)) {
                 array_shift($params);        

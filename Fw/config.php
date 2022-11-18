@@ -1,6 +1,6 @@
 <?php
-
-function getConfigs() {
+//Массив конфигов
+function getConfigs(): array {
     return [
         "db" => [
             "login" => "login_value",

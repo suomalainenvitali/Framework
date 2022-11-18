@@ -3,9 +3,7 @@
 namespace Fw\Core\Multiton;
 
 use Fw\Core\Multiton\MultitonTrait;
-use Fw\Core\Multiton\Interfaces\MultitonInterface;
-
-
+//Класс мультитона
 class Multiton {
     use MultitonTrait;
 }

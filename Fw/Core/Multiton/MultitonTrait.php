@@ -2,15 +2,14 @@
 
 namespace Fw\Core\Multiton;
 
-use Fw\Core\Multiton\Interfaces\MultitonInterface;
-
+//Трейт для мультитона
 trait MultitonTrait {
     protected static $instances = [];
 
     private function __construct() {}
     private function __clone() {}
-
-    public static function getInstance(string $instance_name) {
+    //Инициализация и получение единственного экземпляра объекта определенного класса
+    public static function getInstance(string $instance_name): mixed {
         if (empty(self::$instances[$instance_name])) static::$instances[$instance_name] = new $instance_name;
 
         return self::$instances[$instance_name];

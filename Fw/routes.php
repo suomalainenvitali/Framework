@@ -1,6 +1,7 @@
 <?php
 
-function getRoutes() {
+//Массив маршрутов
+function getRoutes(): array {
     return [
         [
             'condition' => '#^/news/([0-9]+)/([0-9]+)/#',

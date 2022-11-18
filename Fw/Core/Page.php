@@ -3,50 +3,70 @@
 namespace Fw\Core;
 
 class Page {
+    //Контейнер ссылок на JS scripts
     private $js = [];
+    //Контейнер ссылок на CSS files
     private $css = [];
+    //Конетейнер строк
     private $str = []; 
-    public $properties = [];
+    //Контейнер свойств
+    private $properties = [];
 
-    public function addJs(string $src) {
+    //Добавление ссылки скрипта в контейнер
+    public function addJs(string $src): void {
         $this->js[] = $src;
     }
-    public function addCss(string $link) {
+    //Добавление ссылки файла стилей в контейнер
+    public function addCss(string $link): void {
         $this->css[] = $link;
     }
-    public function addString(string $str) {
+    //Добавление строки в контейнер
+    public function addString(string $str): void {
         $this->str[] = $str;
     }
 
-    public function showHead() {
+    //Вывод скриптов, стилей и строк из контейнеров
+    public function showHead(): void {
         foreach ($this->js as $src) {
-            echo  "<script async src='$src'></script>";
+            $this->showJs($src);
         }
         foreach ($this->str as $str) {
-            echo $str;
+            $this->showStr($str);
         }
         foreach ($this->css as $link) {
-            echo "<link href='$link' type='text/css' rel='stylesheet'>";
+            $this->showCss($link);
         }
     }
 
-    public function setProperty(string $id, mixed $value) {
+    //Вывод скрипта
+    public function showJs($src) {
+        if (isset($src)) echo "<script async src='$src'></script>";
+        else "";
+    }
+    //Вывод строки
+    public function showStr($str) {
+        if (isset($str)) echo $str;
+        else "";
+    }
+    //Вывод стиля
+    public function showCss($link) {
+        if (isset($link)) echo "<link href='$link' type='text/css' rel='stylesheet'>";
+        else "";
+    }
+    //Устанавливает свойство
+    public function setProperty(string $id, mixed $value): void {
         $this->properties[$id] = $value;
     }
-
-    public function getProperty(string $id) {
-        if (isset($this->properties[$id])) return $this->properties[$id];
-        
-        return null;
+    //Получает свойство
+    public function getProperty(string $id): string {
+        return isset($this->properties[$id]) ? $this->properties[$id] : null;
     }
-
-    public function showProperty(string $id) {
-        if (isset($this->properties[$id])) return "#FW_PAGE_PROPERTY_{$id}#";
-
-        return null;
+    //Выводит свойство
+    public function showProperty(string $id): string {
+        return isset($this->properties[$id]) ? "#FW_PAGE_PROPERTY_{$id}#" : null;
     }
-
-    public function getAllReplace() {
+    //Возвращает массив макросов свойств и их значения
+    public function getAllReplace(): array {
         $replace_array = [];
 
         foreach ($this->properties as $id => $value) {
