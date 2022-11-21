@@ -21,11 +21,11 @@ class Template {
         $script = $this->__path . "script.js";
 
         //Подключение php файлов шаблона
-        if (file_exists($result_modifier)) include_once $result_modifier;
+        if (file_exists($result_modifier)) include $result_modifier;
 
-        if (file_exists($template)) include_once $template;
+        if (file_exists($template)) include $template;
 
-        if (file_exists($component_epilog)) include_once $component_epilog;
+        if (file_exists($component_epilog)) include $component_epilog;
 
         $app = Multiton::getInstance(Application::class);
         $pager = $app->getPager();

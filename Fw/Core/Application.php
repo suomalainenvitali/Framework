@@ -38,14 +38,16 @@ class Application{
 
     //Вывод шаблона header
     public function header(): void {
+        $this->startBuffer();
+
         echo "<!DOCTYPE html>";
         echo "<html lang='en'>";
         echo "<head>";
-        echo ($this->pager->showHead()); 
+        echo "#FW_HEADERS#"; 
         echo "</head>"; 
         echo "<body>";
         
-        $this->startBuffer();
+        
         include $this->template_path . "header.php";        
     }
     //Вывод шаблона footer нашего сайта
@@ -63,7 +65,7 @@ class Application{
     //Получение контента из буфера ввода, замена макросов и остановка буффера вывода
     private function endBuffer(): void {
         $content = ob_get_contents();
-
+        $content = str_replace("#FW_HEADERS#", $this->pager->showHead(), $content);
         foreach ($this->pager->getAllReplace() as $macros => $value) {
             $content = str_replace($macros, $value, $content);
         }

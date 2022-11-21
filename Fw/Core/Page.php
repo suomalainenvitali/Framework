@@ -26,32 +26,31 @@ class Page {
     }
 
     //Вывод скриптов, стилей и строк из контейнеров
-    public function showHead(): void {
+    public function showHead(): string {
+        $headers = "";
         foreach ($this->js as $src) {
-            $this->showJs($src);
+            $headers = $headers . $this->showJs($src);
         }
         foreach ($this->str as $str) {
-            $this->showStr($str);
+            $headers = $headers . $this->showStr($str);
         }
         foreach ($this->css as $link) {
-            $this->showCss($link);
+            $headers = $headers . $this->showCss($link);
         }
+        return $headers;
     }
 
     //Вывод скрипта
-    public function showJs($src) {
-        if (isset($src)) echo "<script async src='$src'></script>";
-        else "";
+    public function showJs($src): string {
+        return isset($src) ? "<script async src='$src'></script>" : "";
     }
     //Вывод строки
-    public function showStr($str) {
-        if (isset($str)) echo $str;
-        else "";
+    public function showStr($str): string {
+        return isset($str) ? $str : "";
     }
     //Вывод стиля
-    public function showCss($link) {
-        if (isset($link)) echo "<link href='$link' type='text/css' rel='stylesheet'>";
-        else "";
+    public function showCss($link): string {
+        return isset($link) ? "<link href='$link' type='text/css' rel='stylesheet'>" : "";
     }
     //Устанавливает свойство
     public function setProperty(string $id, mixed $value): void {

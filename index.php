@@ -6,15 +6,93 @@
 
     require_once "Fw/init.php";
 
-    $app = Multiton::getInstance(Application::class);
-    $app->includeComponent("fw:element.list", "default", array(1, 2, 3));
+    $params = [
+        'additional_class' => 'window--full-form', 
+        'attr' => [ 
+            'data-form-id' => 'form-123'
+        ],
+        'method' => 'post',
+        'action' => '', 
+        'elements' => [ 
+            [
+                'type' => 'text',
+                'name' => 'login',
+                'additional_class' => 'js-login',
+                'attr' => [
+                    'data-id' => '17'
+                ],
+                'title' => 'Логин',
+                'default' => 'Введите имя'
+            ],
+            [
+                'type' => 'password',
+                'name' => 'password',
+                'title' => 'Пароль'
+            ],
+            [
+                'type' => 'select',
+                'name' => 'server',
+                'additional_class' => 'js-login',
+                'attr' => [
+                    'data-id' => '17'
+                ],
+                'title' => 'Выберите сервер',
+                'list' => [
+                    [
+                        'title' => 'Онлайнер',
+                        'value' => 'onliner',
+                        'additional_class' => 'mini--option',
+                        'attr' => [
+                            'data-id' => '188'
+                        ],
+                        'selected' => true
+                    ],
+                    [
+                        'title' => 'Тутбай',
+                        'value' => 'tut',
+                    ]
+                ]
+            ],
+            [
+                'type' => 'checkbox',
+                'name' => 'login',
+                'additional_class' => 'js-login',
+                'attr' => [
+                    'data-id' => '17'
+                ],
+                'title' => 'Логин'
+            ]
+        ]
+    ];
 
+    $app = Multiton::getInstance(Application::class);
+    $app->getPager()->addCss("https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css");
     $app->header();
+    $app->includeComponent("fw:interface.form", "default", $params);
+    
     
 
 ?>
 
 <pre>
+-------- 21.11.2022 --------
+4 Этап:
+4.1 Стилизовать наш сайт+
+4.2 Создать компонент рендера формы
+
+Элементы формы:
+input checkbox +
+input checkbox multiple +
+input email +
+input number +
+input password +
+input radio +
+input text +
+input text multiple +
+textarea +
+select +
+select multiple +
+
 -------- 18.11.2022 --------
 3 Этап:
 3.1 Создание класса \Core\Type\Dictionary +
