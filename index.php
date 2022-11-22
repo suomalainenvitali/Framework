@@ -1,76 +1,74 @@
 <?php
-    //Точка входа в приложение 
+//Точка входа в приложение 
 
-    use Fw\Core\Application;
-    use Fw\Core\Multiton\Multiton;
+use Fw\Core\Application;
+use Fw\Core\Multiton\Multiton;
 
-    require_once "Fw/init.php";
+require_once "Fw/init.php";
 
-    $params = [
-        'additional_class' => 'window--full-form', 
-        'attr' => [ 
-            'data-form-id' => 'form-123'
+$params = [
+    'additional_class' => 'window--full-form',
+    'attr' => [
+        'data-form-id' => 'form-123'
+    ],
+    'method' => 'post',
+    'action' => '',
+    'elements' => [
+        [
+            'type' => 'text',
+            'name' => 'login',
+            'additional_class' => 'js-login',
+            'attr' => [
+                'data-id' => '17'
+            ],
+            'title' => 'Логин',
+            'default' => 'Введите имя'
         ],
-        'method' => 'post',
-        'action' => '', 
-        'elements' => [ 
-            [
-                'type' => 'text',
-                'name' => 'login',
-                'additional_class' => 'js-login',
-                'attr' => [
-                    'data-id' => '17'
-                ],
-                'title' => 'Логин',
-                'default' => 'Введите имя'
+        [
+            'type' => 'password',
+            'name' => 'password',
+            'title' => 'Пароль'
+        ],
+        [
+            'type' => 'select',
+            'name' => 'server',
+            'additional_class' => 'js-login',
+            'attr' => [
+                'data-id' => '17'
             ],
-            [
-                'type' => 'password',
-                'name' => 'password',
-                'title' => 'Пароль'
-            ],
-            [
-                'type' => 'select',
-                'name' => 'server',
-                'additional_class' => 'js-login',
-                'attr' => [
-                    'data-id' => '17'
-                ],
-                'title' => 'Выберите сервер',
-                'list' => [
-                    [
-                        'title' => 'Онлайнер',
-                        'value' => 'onliner',
-                        'additional_class' => 'mini--option',
-                        'attr' => [
-                            'data-id' => '188'
-                        ],
-                        'selected' => true
+            'title' => 'Выберите сервер',
+            'list' => [
+                [
+                    'title' => 'Онлайнер',
+                    'value' => 'onliner',
+                    'additional_class' => 'mini--option',
+                    'attr' => [
+                        'data-id' => '188'
                     ],
-                    [
-                        'title' => 'Тутбай',
-                        'value' => 'tut',
-                    ]
-                ]
-            ],
-            [
-                'type' => 'checkbox',
-                'name' => 'login',
-                'additional_class' => 'js-login',
-                'attr' => [
-                    'data-id' => '17'
+                    'selected' => true
                 ],
-                'title' => 'Логин'
+                [
+                    'title' => 'Тутбай',
+                    'value' => 'tut',
+                ]
             ]
+        ],
+        [
+            'type' => 'checkbox',
+            'name' => 'login',
+            'additional_class' => 'js-login',
+            'attr' => [
+                'data-id' => '17'
+            ],
+            'title' => 'Логин'
         ]
-    ];
+    ]
+];
 
-    $app = Multiton::getInstance(Application::class);
-    $app->getPager()->addCss("https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css");
-    $app->header();
-    $app->includeComponent("fw:interface.form", "default", $params);
-    
-    
+$app = Multiton::getInstance(Application::class);
+$app->getPager()->addCss("https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css");
+$app->header();
+$app->includeComponent("fw:interface.form", "default", $params);
 
 ?>
 
@@ -125,7 +123,4 @@ https://github.com/suomalainenvitali/Framework
 1.5 создание класса Config +
 </pre>
 
-<?php $app->footer();?>
-
-
-
+<?php $app->footer(); ?>

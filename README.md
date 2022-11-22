@@ -111,4 +111,50 @@ textarea +
 select +
 select multiple +
 
+5 Этап:
+5.1 Абстрактный класс Validator +
+5.2 Создать свои валидаторы:
+
+RegExp - который будет проверять значение по регулярному выражению. +
+InList - из примера, который проверяет содержится ли значение в списке +
+Email - Наследник RegExp с предопределённым шаблоном регулярного выражения +
+Phone - Наследник RegExp с предопределённым шаблоном регулярного выражения +
+MaxLength - создать и доработать MinLength на работу со строками и массивами +
+Number - является числом +
+
+5.1 Предложите свой вариант решения задачи с написанием фабрики.
+
+abstract class ValidatorTest
+{
+    protected $rule = null;
+
+    public static function getFactory($factory)
+    {
+        switch ($factory) {
+            case "MinLengthTest":
+                return new MinLengthTest();
+            case "MaxLengthTest":
+                return new MaxLengthTest();
+        }
+    }
+
+    abstract public function validate($value, $rule): bool;
+}
+
+class MinLengthTest extends ValidatorTest {
+    public function validate($value, $rule): bool {
+        return mb_strlen($value) >= $rule;
+    }
+}
+
+class MaxLengthTest extends ValidatorTest {
+
+    public function validate($value, $rule): bool {
+        return mb_strlen($value) <= $rule;
+    }
+}
+
+var_dump(ValidatorTest::getFactory("MinLengthTest")->validate("string", 6));
+var_dump(ValidatorTest::getFactory("MaxLengthTest")->validate("string", 5));
+
 
