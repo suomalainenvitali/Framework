@@ -8,22 +8,25 @@ class Autoloader {
         ], true, true);
     }
 
-    public static function loadClass($class) {
+    public static function loadClass(string $class) {
         $path = self::buildPath($class);
 
-        if (file_exists($path)) {
+        if (file_exists(__DIR__ . "/" . $path)) {
             require_once $path;
         }
     }
 
-    public static function buildPath($class) {
-        $pathParts = explode('\\', $class);
+    public static function buildPath(string $class) {
 
-        if (count($pathParts) < 2) return null;        
+        $class = str_replace("Fw\\", "", $class);
+
+        $path_parts = explode('\\', $class);
+
+        if (count($path_parts) < 2) return null;        
 
         return sprintf(
             '%s.php',
-            implode(DIRECTORY_SEPARATOR, $pathParts)
+            implode(DIRECTORY_SEPARATOR, $path_parts)
         );
     }
 }
